@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Attendance Checking</string>
+    <string name="title_activity_login">Đăng nhập</string>
+    <string name="prompt_code">Mã cán bộ</string>
+    <string name="prompt_password">Mật khẩu</string>
+    <string name="action_sign_in">Đăng nhập</string>
+    <string name="login_progress_text">Đang đăng nhập…</string>
+</resources>
