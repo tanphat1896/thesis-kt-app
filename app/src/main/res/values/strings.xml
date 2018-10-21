@@ -5,4 +5,10 @@
     <string name="prompt_password">Mật khẩu</string>
     <string name="action_sign_in">Đăng nhập</string>
     <string name="login_progress_text">Đang đăng nhập…</string>
+    <string name="schedule">Lịch dạy</string>
+    <string name="check">Điểm danh</string>
+    <string name="loading">Đang tải</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="absent">Vắng</string>
+    <string name="gender">Giới tính</string>
 </resources>

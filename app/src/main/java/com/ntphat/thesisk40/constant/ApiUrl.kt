@@ -9,4 +9,7 @@ object ApiUrl {
 
     @JvmStatic
     val LOGIN_PATH = "/api/login"
+
+    @JvmStatic
+    val GET_TEACHING_CLASS = "/api/v1/teaching_classes"
 }

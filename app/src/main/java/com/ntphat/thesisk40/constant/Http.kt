@@ -12,4 +12,7 @@ object Http {
 
     @JvmStatic
     val APP_JSON = "application/json"
+
+    @JvmStatic
+    val AUTH_HEADER = "Authorization"
 }

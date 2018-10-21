@@ -12,7 +12,7 @@ class ApiRequestBuilder {
             "Accept" to Http.APP_JSON
     )
 
-    private lateinit var method: String
+    private var method: String = "get"
 
     private lateinit var url: String
 
@@ -43,11 +43,14 @@ class ApiRequestBuilder {
     fun body(body: Map<String, String>): ApiRequestBuilder {
         this.hasFile = false
         val builder = FormBody.Builder()
-        body.forEach { key, value -> builder.add(key, value)}
+        body.forEach { (key, value) -> builder.add(key, value) }
         this.body = builder.build()
         return this
     }
 
+    /**
+     * Chưa implement fun này
+     */
     fun file(file: File) {
         this.hasFile = true
     }
