@@ -11,6 +11,7 @@ import com.ntphat.thesisk40.presenter.BasePresenter
 import com.ntphat.thesisk40.presenter.LoginPresenter
 import com.ntphat.thesisk40.util.SharedPref
 import java.lang.Exception
+import java.net.ConnectException
 import java.net.NoRouteToHostException
 import java.net.SocketTimeoutException
 
@@ -56,6 +57,7 @@ class LoginPresenterImpl(
     }
 
     override fun handleError(e: Exception) {
+        Log.e(javaClass.name, e.localizedMessage, e)
         if (e is SocketTimeoutException || e is NoRouteToHostException) {
             view.showLoginError(Error(LocalErrorInfo.CONNECTION_FAILED))
             return

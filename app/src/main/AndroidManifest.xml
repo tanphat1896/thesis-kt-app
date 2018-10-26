@@ -9,6 +9,14 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -19,24 +27,45 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".view.activity.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-        <activity
-            android:name=".view.activity.MainActivity"
-            android:label="Lịch dạy hôm nay" />
-        <activity
-            android:name=".view.activity.SelectClassActivity"
-            android:label="Chọn lớp điểm danh">
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.AttendanceCheckListActivity" />
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:label="Lịch dạy hôm nay"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.SelectClassActivity"
+            android:label="Chọn lớp điểm danh"
+            android:screenOrientation="portrait">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity
+            android:name=".view.activity.AttendanceCheckListActivity"
+            android:label="Điểm danh"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.ImageCheckingActivity"
+            android:label="Điểm danh ảnh"
+            android:screenOrientation="portrait" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

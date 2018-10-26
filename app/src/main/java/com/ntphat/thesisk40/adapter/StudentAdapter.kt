@@ -39,17 +39,19 @@ class StudentAdapter(
         } else {
             R.drawable.male
         })
-        holder.codeName.text = "${vhStudent.student.studentCode} - ${vhStudent.student.name}"
+        holder.code.text = vhStudent.student.studentCode
+        holder.name.text = vhStudent.student.name
         holder.image.setImageResource(if (vhStudent.present) {
             R.drawable.ic_check_circle_green_24dp
         } else {
-            0
+            R.drawable.ic_highlight_off_black_24dp
         })
 
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val codeName: TextView = view.code_name
+        val code: TextView = view.code
+        val name: TextView = view.name
         val image: ImageView = view.status
         val genderImg: ImageView = view.gender_img
     }

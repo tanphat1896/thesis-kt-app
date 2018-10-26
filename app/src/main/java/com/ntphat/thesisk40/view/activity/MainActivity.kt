@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), MainView {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Thoát ứng dụng")
                 .setMessage("Xác nhận thoát ứng dụng?")
-                .setPositiveButton("Đồng ý", { _, _ -> finish() })
+                .setPositiveButton("Đồng ý") { _, _ -> finish() }
                 .setNegativeButton("Hủy bỏ", null)
                 .show()
     }

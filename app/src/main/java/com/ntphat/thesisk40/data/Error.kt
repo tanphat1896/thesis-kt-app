@@ -1,8 +1,8 @@
 package com.ntphat.thesisk40.data
 
 data class Error(
-        val code: Int = 0,
-        val message: String = "Lỗi không xác định."
+        val code: Int = LocalErrorInfo.UNKNOWN.code(),
+        val message: String = LocalErrorInfo.UNKNOWN.message()
 ) {
     constructor(errorInfo: LocalErrorInfo)
             : this(errorInfo.code(), errorInfo.message())

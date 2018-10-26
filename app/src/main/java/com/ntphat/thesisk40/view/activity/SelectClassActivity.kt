@@ -5,17 +5,22 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.SearchView
 import com.ntphat.thesisk40.R
 import com.ntphat.thesisk40.adapter.TeachingClassAdapter
+import com.ntphat.thesisk40.constant.App
 import com.ntphat.thesisk40.constant.IntentString
 import com.ntphat.thesisk40.data.Error
+import com.ntphat.thesisk40.presenter.Initializer
 import com.ntphat.thesisk40.presenter.SelectClassPresenter
 import com.ntphat.thesisk40.presenter.impl.SelectClassPresenterImpl
 import com.ntphat.thesisk40.util.UiWidget
 import com.ntphat.thesisk40.view.action.RecyclerTouchListener
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.yesButton
 
 class SelectClassActivity : AppCompatActivity(), SelectClassPresenter.View {
 
@@ -30,18 +35,23 @@ class SelectClassActivity : AppCompatActivity(), SelectClassPresenter.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_teaching_class)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         progress = findViewById(R.id.progress)
         content = findViewById(R.id.main_content)
 
         initSearchView()
         initRecyclerView()
+    }
 
+    override fun onResume() {
+        super.onResume()
         presenter.initList()
     }
 
     private fun initSearchView() {
         searchView = findViewById(R.id.search_view)
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?) = false
 
             override fun onQueryTextChange(p0: String?): Boolean {
@@ -64,6 +74,7 @@ class SelectClassActivity : AppCompatActivity(), SelectClassPresenter.View {
                     override fun onClick(view: View, position: Int) {
                         presenter.checkClass(position)
                     }
+
                     override fun onLongClick(view: View?, position: Int) {}
                 }
         ))
@@ -105,7 +116,27 @@ class SelectClassActivity : AppCompatActivity(), SelectClassPresenter.View {
 
     override fun showError(e: Error) {
         runOnUiThread {
-            UiWidget.toast(this, e.toString(), true)
+            alert(e.toString()) {
+                yesButton {
+                    if (!presenter.isBusinessError) {
+                        exit()
+                    }
+                }
+            }.show()
+        }
+    }
+
+    override fun exit() {
+        finish()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

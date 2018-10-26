@@ -10,5 +10,7 @@ interface Presenter {
 
     interface View {
         fun showError(e: Error)
+
+        fun exit()
     }
 }

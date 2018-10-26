@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="0dp">
+
+        <RelativeLayout
+            android:id="@+id/data_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/face_img"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/gender"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/txt_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@id/face_img"
+                android:text="B1400715"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_code"
+                android:layout_toEndOf="@id/face_img"
+                android:text="Nguyễn Tấn phát"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_confidence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="15dp"
+                android:text="70.22%"
+                android:textColor="@color/colorPositive"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

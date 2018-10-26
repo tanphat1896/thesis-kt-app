@@ -12,4 +12,7 @@ object ApiUrl {
 
     @JvmStatic
     val GET_TEACHING_CLASS = "/api/v1/teaching_classes"
+
+    @JvmStatic
+    val POST_FACE_CHECKING = "/api/v1/face_checking"
 }

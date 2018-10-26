@@ -32,6 +32,8 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.View, Initializer {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        supportActionBar?.hide()
+
         errorText = findViewById(R.id.login_error)
         textCode = findViewById(R.id.code)
         textPwd = findViewById(R.id.password)
@@ -142,5 +144,9 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.View, Initializer {
 
     override fun showError(e: Error) {
         errorText.text = e.toString()
+    }
+
+    override fun exit() {
+        finish()
     }
 }
