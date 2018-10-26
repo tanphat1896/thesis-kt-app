@@ -14,4 +14,10 @@ object App {
 
     @JvmStatic
     val PROPERTIES = Properties()
+
+    @JvmStatic
+    val GALLERY_DIRECTORY_NAME = "TakenPicture"
+
+    @JvmStatic
+    val BITMAP_SAMPLE_SIZE = 8
 }

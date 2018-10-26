@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- Search / will display always -->
+    <item android:id="@+id/save_checklist"
+        android:icon="@drawable/ic_save_white_24dp"
+        android:orderInCategory="2"
+        android:title="@string/save"
+        app:showAsAction="withText|always" />
+
+    <!-- Location Found -->
+    <item android:id="@+id/image_checking"
+        android:icon="@drawable/ic_image_white_24dp"
+        android:title="@string/image"
+        android:orderInCategory="1"
+        app:showAsAction="ifRoom|withText" />
+
+    <!--&lt;!&ndash; Refresh &ndash;&gt;-->
+    <!--<item android:id="@+id/action_refresh"-->
+        <!--android:icon="@drawable/ic_action_refresh"-->
+        <!--android:title="@string/action_refresh"-->
+        <!--app:showAsAction="ifRoom" />-->
+
+    <!-- Help -->
+    <!--<item android:id="@+id/action_help"-->
+        <!--android:icon="@drawable/ic_check_circle_green_24dp"-->
+        <!--android:title="Test check"-->
+        <!--app:showAsAction="never" />-->
+
+    <!--&lt;!&ndash; Check updates &ndash;&gt;-->
+    <!--<item android:id="@+id/action_check_updates"-->
+        <!--android:icon="@drawable/ic_highlight_off_black_24dp"-->
+        <!--android:title="Test remove"-->
+        <!--app:showAsAction="never" />-->
+</menu>

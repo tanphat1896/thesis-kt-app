@@ -12,7 +12,7 @@ class ApiRequestBuilder {
             "Accept" to Http.APP_JSON
     )
 
-    private lateinit var method: String
+    private var method: String = "get"
 
     private lateinit var url: String
 
@@ -40,16 +40,30 @@ class ApiRequestBuilder {
         return this
     }
 
-    fun body(body: Map<String, String>): ApiRequestBuilder {
+    fun body(body: Map<String, Any>): ApiRequestBuilder {
         this.hasFile = false
         val builder = FormBody.Builder()
-        body.forEach { key, value -> builder.add(key, value)}
+        body.forEach { (key, value) -> builder.add(key, value.toString()) }
         this.body = builder.build()
         return this
     }
 
-    fun file(file: File) {
+    /**
+     * Chưa implement fun này
+     */
+    fun file(file: File, extras: Map<String, Any>): ApiRequestBuilder {
         this.hasFile = true
+
+        val builder = MultipartBody.Builder()
+        builder.setType(MultipartBody.FORM)
+        builder.addFormDataPart(
+                "file", file.name, RequestBody.create(Http.MEDIA_JPEG, file)
+        )
+        extras.forEach { (key, value) -> builder.addFormDataPart(key, value.toString()) }
+
+        this.body = builder.build()
+
+        return this
     }
 
     @Throws(InvalidParameterException::class)

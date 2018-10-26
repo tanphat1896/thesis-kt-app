@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="?android:attr/selectableItemBackground"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="0dp">
+
+        <RelativeLayout
+            android:id="@+id/data_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/gender_img"
+                android:layout_width="40dp"
+                android:layout_marginEnd="10dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/gender" />
+
+            <TextView
+                android:layout_toEndOf="@id/gender_img"
+                android:id="@+id/code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B1400715"
+                android:textStyle="italic"/>
+
+            <TextView
+                android:layout_toEndOf="@id/gender_img"
+                android:layout_below="@id/code"
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Nguyễn Tấn phát"/>
+
+            <ImageView
+                android:id="@+id/status"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="7dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_highlight_off_black_24dp"
+                android:layout_alignParentEnd="true"
+
+                android:contentDescription="@string/absent" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
