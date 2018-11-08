@@ -6,4 +6,7 @@ object IntentString {
 
     @JvmStatic
     val FACE_CHECK_RESULT = "FACE_CHECK_RESULT"
+
+    @JvmStatic
+    val SCHEDULE_WEB_URL = "/quan-ly/lich-day"
 }

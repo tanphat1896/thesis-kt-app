@@ -5,7 +5,7 @@ object ApiUrl {
     val BASE_PRODUCTION = "http://107.191.61.4"
 
     @JvmStatic
-    val BASE_DEVELOPMENT = "http://192.168.43.200"
+    val BASE_DEVELOPMENT = "http://192.168.43.162"
 
     @JvmStatic
     val LOGIN_PATH = "/api/login"
@@ -15,4 +15,7 @@ object ApiUrl {
 
     @JvmStatic
     val POST_FACE_CHECKING = "/api/v1/face_checking"
+
+    @JvmStatic
+    val GET_SCHEDULE = "/api/v1/schedules"
 }

@@ -147,13 +147,15 @@ class AttendanceCheckListActivity : AppCompatActivity(), AttendanceCheckListPres
 
     override fun showError(e: Error) {
         runOnUiThread {
-            alert(e.toString()) {
+            val alert = alert(e.toString()) {
                 yesButton {
                     if (!presenter.isBusinessError) {
                         exit()
                     }
                 }
-            }.show()
+            }
+            alert.isCancelable = false
+            alert.show()
         }
     }
 
