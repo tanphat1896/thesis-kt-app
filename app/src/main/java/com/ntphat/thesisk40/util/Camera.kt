@@ -38,9 +38,7 @@ class Camera {
                     }
                 }
                 val timeStamp = SimpleDateFormat("yyyy_MM_dd_HHmmss", Locale.getDefault()).format(Date())
-                val mediaFile: File
-                mediaFile = File(mediaStorageDir.path + "/IMG_" + timeStamp + ".jpg")
-                return mediaFile
+                return File(mediaStorageDir.path + "/IMG_" + timeStamp + ".jpg")
             }
 
         fun refreshGallery(context: Context, filePath: String) {
@@ -93,6 +91,13 @@ class Camera {
             } catch (e: IOException) {
                 Log.e("CameraUtil", e.localizedMessage, e)
             }
+        }
+
+        fun deleteAppImageDir() {
+            Storage.deleteRecursive(File(
+                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                    App.GALLERY_DIRECTORY_NAME
+            ))
         }
     }
 }

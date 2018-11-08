@@ -56,10 +56,8 @@ class SelectClassPresenterImpl(
 
     override fun onTeachingClassFetched(teachingClassResponse: TeachingClassResponse) {
         if (teachingClassResponse.isError()) {
-            if (teachingClassResponse.isError()) {
-                view.showError(teachingClassResponse.error)
-                return
-            }
+            view.showError(teachingClassResponse.error)
+            return
         }
 
         teachingClasses.clear()

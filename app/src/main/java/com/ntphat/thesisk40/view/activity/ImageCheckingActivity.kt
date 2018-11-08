@@ -8,7 +8,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.support.annotation.CheckResult
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -29,12 +28,12 @@ import com.ntphat.thesisk40.exception.InvalidExtraData
 import com.ntphat.thesisk40.presenter.FaceCheckingPresenter
 import com.ntphat.thesisk40.presenter.impl.FaceCheckingPresenterImpl
 import com.ntphat.thesisk40.util.Camera
+import com.ntphat.thesisk40.util.Storage
 import com.ntphat.thesisk40.util.UrlParser
-import com.ntphat.thesisk40.view.action.RecyclerTouchListener
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
-import org.jetbrains.anko.toast
 import org.jetbrains.anko.yesButton
+import java.io.File
 import java.lang.Exception
 
 
@@ -101,6 +100,8 @@ class ImageCheckingActivity : AppCompatActivity(), FaceCheckingPresenter.View {
         } catch (e: InvalidExtraData) {
             presenter.handleError(e)
         }
+
+        Camera.deleteAppImageDir()
     }
 
     private fun initRecyclerView() {
@@ -154,19 +155,20 @@ class ImageCheckingActivity : AppCompatActivity(), FaceCheckingPresenter.View {
     }
 
     private fun takePicture() {
-        Camera.deleteMedia(imageStoragePath)
-
+        Camera.deleteAppImageDir()
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val file = Camera.outputMediaFile
         if (file == null) {
-            alert ("Lỗi không tạo được thư mục").show()
+            alert("Lỗi không tạo được thư mục").show()
             return
         }
 
-        imageStoragePath = file.absolutePath
-        val uri = Camera.getOutputMediaFileUri(this, file)
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-        this.startActivityForResult(intent, REQUEST_CODE_CAPTURE_IMAGE)
+        file.absolutePath?.let {
+            imageStoragePath = it
+            val uri = Camera.getOutputMediaFileUri(this, file)
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+            this.startActivityForResult(intent, REQUEST_CODE_CAPTURE_IMAGE)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -180,6 +182,7 @@ class ImageCheckingActivity : AppCompatActivity(), FaceCheckingPresenter.View {
             val bitmap = Camera.optimizeBitmap(App.BITMAP_SAMPLE_SIZE, imageStoragePath)
             imageViewTakenPicture.setImageBitmap(bitmap)
             btnCheck.isEnabled = true
+            Storage.saveBitmapToFile(File(imageStoragePath))
         } catch (e: Exception) {
             btnCheck.isEnabled = false
             alert("Lỗi! Hãy thử chụp lại lần nữa").show()
@@ -193,7 +196,7 @@ class ImageCheckingActivity : AppCompatActivity(), FaceCheckingPresenter.View {
                 alert("Xác nhận quay lại") {
                     yesButton { finish() }
                     noButton {  }
-                }
+                }.show()
                 true
             }
             else -> {
@@ -257,12 +260,15 @@ class ImageCheckingActivity : AppCompatActivity(), FaceCheckingPresenter.View {
             alert("Xác nhận quay lại chụp ảnh, dữ liệu hiện tại sẽ mất?") {
                 yesButton {
                     presenter.destroyData()
+                    imageViewTakenPicture.setImageResource(R.drawable.male)
+                    Camera.deleteMedia(imageStoragePath)
                     toggleTakePicture(true)
                 }
                 noButton {  }
             }.show()
             return
         }
+        Camera.deleteMedia(imageStoragePath)
         toggleTakePicture(true)
     }
 
@@ -277,6 +283,7 @@ class ImageCheckingActivity : AppCompatActivity(), FaceCheckingPresenter.View {
     }
 
     override fun backToCheckList(faceCheckResultJson: String) {
+        Camera.deleteMedia(imageStoragePath)
         val i = Intent()
         i.putExtra(IntentString.FACE_CHECK_RESULT, faceCheckResultJson)
         setResult(Activity.RESULT_OK, i)

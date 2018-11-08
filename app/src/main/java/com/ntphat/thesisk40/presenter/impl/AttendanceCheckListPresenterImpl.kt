@@ -55,6 +55,15 @@ class AttendanceCheckListPresenterImpl(
             return
         }
 
+        if (studentResponse.content.isEmpty()) {
+            isBusinessError = false
+            view.showError(Error(
+                    LocalErrorInfo.CUSTOM.code(),
+                    LocalErrorInfo.CUSTOM.message("Lớp không có sinh viên nào!!!")
+            ))
+            return
+        }
+
         vhStudents.clear()
         vhStudents.addAll(studentResponse.content.map {
             StudentAdapter.StudentViewHolder(it, false)
