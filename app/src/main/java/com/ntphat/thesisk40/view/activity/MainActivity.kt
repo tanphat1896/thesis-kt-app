@@ -44,8 +44,6 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
 
         initRecyclerView()
 
-        presenter.initList()
-
         bottomNavBar = findViewById(R.id.bottomNavBar)
 
         bottomNavBar.setOnNavigationItemSelectedListener {
@@ -70,6 +68,7 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
     override fun onResume() {
         super.onResume()
         bottomNavBar.selectedItemId = R.id.schedule
+        presenter.initList()
     }
 
     override fun setAdapter(adapter: ScheduleAdapter) {
