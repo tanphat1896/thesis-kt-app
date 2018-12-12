@@ -14,7 +14,6 @@ import com.ntphat.thesisk40.presenter.FaceCheckingPresenter
 import com.ntphat.thesisk40.util.JsonParser
 import com.ntphat.thesisk40.view.activity.ImageCheckingActivity
 import java.io.File
-import java.lang.Exception
 
 class FaceCheckingPresenterImpl(
         val view: ImageCheckingActivity
@@ -76,5 +75,10 @@ class FaceCheckingPresenterImpl(
 
     override fun backToCheckList() {
         view.backToCheckList(JsonParser.toJson(faceCheckingResult))
+    }
+
+    override fun viewFaces(position: Int) {
+        val faceDetail = faceDetails[position]
+        view.navigateToViewFace(faceDetail.student)
     }
 }

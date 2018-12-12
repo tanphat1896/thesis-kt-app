@@ -29,6 +29,7 @@ class AttendanceCheckListPresenterImpl(
 
     private val vhStudents: MutableList<StudentAdapter.StudentViewHolder> = mutableListOf()
     private val studentImages: MutableMap<String, String> = mutableMapOf()
+    private val presentedStudentIds: MutableList<Int> = mutableListOf()
     private var totalPresent: Int = 0
     private lateinit var date: String
     private var session: Int = 1
@@ -172,7 +173,9 @@ class AttendanceCheckListPresenterImpl(
         val faceCheckingResult = JsonParser.fromJson<FaceCheckingResult>(faceCheckResultJson)
             ?: return view.showError(Error(LocalErrorInfo.INVALID_INTENT_EXTRA))
         faceCheckingResult.imageDetail.forEach {
-            vhStudents.find { vhStd -> vhStd.student.id == it.student.id }?.apply {
+            vhStudents.find { vhStd -> vhStd.student.id == it.student.id
+                    && !presentedStudentIds.contains(it.student.id) }?.apply {
+                presentedStudentIds.add(it.student.id)
                 this.present = true
                 studentImages["image-std-${it.student.id}"] = faceCheckingResult.imageLink
                 totalPresent++

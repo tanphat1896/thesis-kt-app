@@ -2,6 +2,7 @@ package com.ntphat.thesisk40.presenter
 
 import com.ntphat.thesisk40.adapter.FaceDetailAdapter
 import com.ntphat.thesisk40.data.response.CommonResponse
+import com.ntphat.thesisk40.entity.Student
 
 interface FaceCheckingPresenter : Presenter {
 
@@ -19,6 +20,8 @@ interface FaceCheckingPresenter : Presenter {
 
     fun backToCheckList()
 
+    fun viewFaces(position: Int)
+
     interface View : Presenter.View {
         fun toggleTakePicture(visible: Boolean)
 
@@ -35,5 +38,7 @@ interface FaceCheckingPresenter : Presenter {
         fun refreshList()
 
         fun backToCheckList(faceCheckResultJson: String)
+
+        fun navigateToViewFace(student: Student)
     }
 }

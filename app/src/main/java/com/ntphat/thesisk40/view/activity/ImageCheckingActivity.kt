@@ -24,12 +24,14 @@ import com.ntphat.thesisk40.adapter.FaceDetailAdapter
 import com.ntphat.thesisk40.constant.App
 import com.ntphat.thesisk40.constant.IntentString
 import com.ntphat.thesisk40.data.Error
+import com.ntphat.thesisk40.entity.Student
 import com.ntphat.thesisk40.exception.InvalidExtraData
 import com.ntphat.thesisk40.presenter.FaceCheckingPresenter
 import com.ntphat.thesisk40.presenter.impl.FaceCheckingPresenterImpl
 import com.ntphat.thesisk40.util.Camera
 import com.ntphat.thesisk40.util.Storage
 import com.ntphat.thesisk40.util.UrlParser
+import com.ntphat.thesisk40.view.action.RecyclerTouchListener
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.yesButton
@@ -109,6 +111,17 @@ class ImageCheckingActivity : AppCompatActivity(), FaceCheckingPresenter.View {
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         rvFaceDetail.layoutManager = layoutManager
+        rvFaceDetail.addOnItemTouchListener(RecyclerTouchListener(
+                this,
+                rvFaceDetail,
+                object : RecyclerTouchListener.ClickListener {
+                    override fun onClick(view: View, position: Int) {
+                        presenter.viewFaces(position)
+                    }
+
+                    override fun onLongClick(view: View?, position: Int) {}
+                }
+        ))
     }
 
     private fun initAction() {
@@ -288,5 +301,12 @@ class ImageCheckingActivity : AppCompatActivity(), FaceCheckingPresenter.View {
         i.putExtra(IntentString.FACE_CHECK_RESULT, faceCheckResultJson)
         setResult(Activity.RESULT_OK, i)
         finish()
+    }
+
+    override fun navigateToViewFace(student: Student) {
+        val i = Intent(this, ViewFaceActivity::class.java)
+        i.putExtra(IntentString.STUDENT_CODE, student.studentCode)
+        i.putExtra(IntentString.STUDENT_NAME, student.name)
+        startActivity(i)
     }
 }

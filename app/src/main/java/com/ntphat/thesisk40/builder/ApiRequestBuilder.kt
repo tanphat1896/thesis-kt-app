@@ -48,9 +48,6 @@ class ApiRequestBuilder {
         return this
     }
 
-    /**
-     * Chưa implement fun này
-     */
     fun file(file: File, extras: Map<String, Any>): ApiRequestBuilder {
         this.hasFile = true
 

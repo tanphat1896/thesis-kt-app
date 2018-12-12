@@ -18,4 +18,7 @@ object ApiUrl {
 
     @JvmStatic
     val GET_SCHEDULE = "/api/v1/schedules"
+
+    @JvmStatic
+    val GET_STUDENT_FACES = "/api/v1/students"
 }
